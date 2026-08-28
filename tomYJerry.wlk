@@ -22,6 +22,26 @@ object tom {
         */
         return energia > 50
     }
+    method puedeRecorrer(distancia){
+        /*Se solicita saber si tom puede cazar un ratón que está a cierta 
+        distancia (indicando la distancia). Puede cazar si tiene energía 
+        suficiente para recorrer esa distancia. Es decir, la energía que 
+        gastaría en correr la distancia es menor a su propia energía.
+        */
+        return distancia / 2 < energia
+    }
+    method cazar(raton, distancia){
+        /*Cazar un ratón si puede, y hacer que lo coma. Nota: Acá se busca ser 
+        capaz de evitar la duplicación de código (subtareas), y manejar 
+        correctamente métodos booleanos de consulta.
+        */
+        if (self.puedeRecorrer(distancia)){
+            self.correr(distancia)
+            self.comer(raton)
+        }
+    }
+
+
 }
 
 object jerry {
