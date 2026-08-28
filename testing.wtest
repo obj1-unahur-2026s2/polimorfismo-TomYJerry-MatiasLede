@@ -1,11 +1,66 @@
 import tomYJerry.*
 describe "Tom y Jerry"{
+    /*Acá vamos a verificar mediante los test de wollok si nuestro código está 
+    correcto. Para este ejercicio vamos a escribirlos como si se tratara de una 
+    historia, y por ahora se repetirá código en cada uno de los test, más 
+    adelante veremos como evitar eso.
+    */
     test "Al inicio, la velocidad máxima de Tom es 10 (su energía es 50)"{
         assert.equals(10, tom.velocidadMaxima())
+        assert.equals(50, tom.energia())
     }
-    test "Si Tom come a Jerry, la velocidad máxima pasa a ser  15.2 
-    (su energía es 102)"{
+    test "Si Tom come a Jerry, la velocidad máxima pasa a ser  15.2 (su energía es 102)"{
         tom.comer(jerry)
         assert.equals(15.2, tom.velocidadMaxima())
+        assert.equals(102, tom.energia())
     }
+    test "Si Tom corre 24 mts, su velocidad máxima es de 14 (energia:90)"{
+        //Se esperaba que devuelva esto: Expected <14> but found <8.8>
+        tom.comer(jerry)
+        tom.correr(24)
+        assert.equals(14, tom.velocidadMaxima())
+        assert.equals(90, tom.energia())
+    }
+    test "Si come a Nibbles, pasa a tener de velocidad máxima 18.7 (energía:137)"{
+        tom.comer(jerry)
+        tom.correr(24)
+        tom.comer(nibbles)
+        assert.equals(18.7, tom.velocidadMaxima())
+        assert.equals(137, tom.energia())
+    }
+    test "Si Jerry cumple 3 años y Tom lo come, pasaría a tener 25.9 (energia:209)"{
+        tom.comer(jerry)
+        tom.correr(24)
+        tom.comer(nibbles)
+        jerry.cumplirAnios()
+        tom.comer(jerry)
+        assert.equals(25.9, tom.velocidadMaxima())
+        assert.equals(209, tom.energia())
+    }
+    test "Tom puede cazar un ratón a 30 metros"{
+        tom.comer(jerry)
+        tom.correr(24)
+        tom.comer(nibbles)
+        jerry.cumplirAnios()
+        tom.comer(jerry)
+        assert.that(tom.puedeRecorrer(30))
+    }
+    test "Tom no puede cazar un ratón a 500 mts"{
+        tom.comer(jerry)
+        tom.correr(24)
+        tom.comer(nibbles)
+        jerry.cumplirAnios()
+        tom.comer(jerry)
+        assert.notThat(tom.puedeRecorrer(500))
+    }
+    test "Si Tom caza a Perez, que está a 10 mts, su velocidad max va a ser 26.8"{
+        tom.comer(jerry)
+        tom.correr(24)
+        tom.comer(nibbles)
+        jerry.cumplirAnios()
+        tom.comer(jerry)
+        tom.cazar(perez,10)
+        assert.equals(26.8,tom.velocidadMaxima())
+    }
+
 }
