@@ -37,12 +37,24 @@ describe "Tom y Jerry"{
         assert.equals(25.9, tom.velocidadMaxima())
         assert.equals(209, tom.energia())
     }
+    test "Si Tom corre 38 metros su velocidad pasa a ser 24 (energia:190)"{
+        tom.comer(jerry)
+        tom.correr(24)
+        tom.comer(nibbles)
+        jerry.cumplirAnios()
+        tom.comer(jerry)
+        tom.correr(38)
+        assert.equals(24, tom.velocidadMaxima())
+        assert.equals(190, tom.energia())
+
+    }
     test "Tom puede cazar un ratón a 30 metros"{
         tom.comer(jerry)
         tom.correr(24)
         tom.comer(nibbles)
         jerry.cumplirAnios()
         tom.comer(jerry)
+        tom.correr(38)
         assert.that(tom.puedeRecorrer(30))
     }
     test "Tom no puede cazar un ratón a 500 mts"{
@@ -51,16 +63,18 @@ describe "Tom y Jerry"{
         tom.comer(nibbles)
         jerry.cumplirAnios()
         tom.comer(jerry)
+        tom.correr(38)
         assert.notThat(tom.puedeRecorrer(500))
     }
-    test "Si Tom caza a Perez, que está a 10 mts, su velocidad max va a ser 26.8"{
+    test "Si Tom caza a Perez, que está a 10 mts, su velocidad max va a ser 24.9"{
         tom.comer(jerry)
         tom.correr(24)
         tom.comer(nibbles)
         jerry.cumplirAnios()
         tom.comer(jerry)
+        tom.correr(38)
         tom.cazar(perez,10)
-        assert.equals(26.8,tom.velocidadMaxima())
+        assert.equals(24.9,tom.velocidadMaxima())
     }
 
 }
